@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* Dark mode = a `dark` class on <html> (lets you add a toggle later) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 1. Raw values: the only place hex codes live */
+:root {
+  --paper: #F4F6F8;
+  --surface: #FFFFFF;
+  --line: #DCE2E8;
+  --ink: #0E1B2C;
+  --muted: #5A6878;
+
+  --brand: #0B6E63;        /* principal, primary actions */
+  --brand-ink: #FFFFFF;    /* text on a brand button */
+  --brand-soft: #E3F1EF;
+  --interest: #D98324;     /* interest, attention */
+
+  --success: #1F8A4C;  --success-soft: #E3F3EA;  --success-ink: #1A6339;
+  --danger:  #C23B3B;  --danger-soft:  #FBE7E7;  --danger-ink:  #9E2B2B;
+  --pending: #3A5BD9;  --pending-soft: #E8EDFB;  --pending-ink: #2A44A8;
+}
+
+.dark {
+  --paper: #0A1420;
+  --surface: #111F2F;
+  --line: #223247;
+  --ink: #E8EEF4;
+  --muted: #93A3B5;
+
+  --brand: #2FA08F;
+  --brand-ink: #04201C;
+  --brand-soft: #0F2E2B;
+  --interest: #E8993F;
+
+  --success: #4CC37E;  --success-soft: #12301F;  --success-ink: #6FD39A;
+  --danger:  #E76A6A;  --danger-soft:  #3A1818;  --danger-ink:  #F08C8C;
+  --pending: #7C93F0;  --pending-soft: #1A2550;  --pending-ink: #9FB2F5;
+}
+
+/* 2. Expose them as Tailwind utilities: bg-paper, text-muted, border-line … */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-interest: var(--interest);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-ink: var(--success-ink);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-ink: var(--danger-ink);
+  --color-pending: var(--pending);
+  --color-pending-soft: var(--pending-soft);
+  --color-pending-ink: var(--pending-ink);
+}
+
+/* 3. Fonts, radii, type scale (static tokens, no dark variant needed) */
+@theme {
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+
+  --radius-input: 8px;
+  --radius-button: 10px;
+  --radius-card: 16px;
+  --radius-hero: 24px;
+
+  --text-display: 4rem;   --text-display--line-height: 1.05;
+  --text-title: 2.5rem;   --text-title--line-height: 1.15;
+}
+
+/* 4. Global defaults */
+@layer base {
+  body {
+    @apply bg-paper font-sans text-base text-ink antialiased;
+  }
+  :focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+  }
+  /* every figure aligns in columns */
+  table, .tabular { font-variant-numeric: tabular-nums; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
